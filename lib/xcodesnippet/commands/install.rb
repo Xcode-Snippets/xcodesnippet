@@ -3,7 +3,7 @@ require 'yaml/front-matter'
 require 'fileutils'
 require 'securerandom'
 
-USER_XCODE_SNIPPETS_DIRECTORY = "~/Library/Developer/Xcode/UserData/CodeSnippets/"
+USER_XCODE_SNIPPETS_DIRECTORY = File.expand_path("~/Library/Developer/Xcode/UserData/CodeSnippets/")
 
 command :install do |c|
   c.syntax = 'codesnippet install [SNIPPET]'
