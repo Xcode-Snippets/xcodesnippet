@@ -20,8 +20,13 @@ command :install do |c|
     say_error "Input file is empty" and abort if @content.empty?
 
     extract_front_matter!
-
-    @output_filepath = File.join(USER_XCODE_SNIPPETS_DIRECTORY, @snippet.identifier + ".codesnippet")
+    @output_file_prefix = case File.extname(@input_filepath)
+                        when ".swift" then "swift-"
+                        when ".m" then "objc-"
+                        when ".mm" then "objcpp-"
+                        else ""
+                        end
+    @output_filepath = File.join(USER_XCODE_SNIPPETS_DIRECTORY, @output_file_prefix + @snippet.completion_prefix + ".codesnippet")
     begin
       FileUtils.mkdir_p(USER_XCODE_SNIPPETS_DIRECTORY)
 
@@ -60,6 +65,6 @@ def extract_front_matter!
     @snippet.completion_scopes = [front_matter["completion-scope"]] || front_matter["completion-scopes"] || "All"
     @snippet.identifier = SecureRandom.uuid().upcase
     @snippet.is_user_snippet = true
-    @snippet.version = 0
+    @snippet.version = 2
   end
 end
