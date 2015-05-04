@@ -57,7 +57,7 @@ def extract_front_matter!
                         end
     @snippet.title = front_matter["title"] || ""
     @snippet.summary = front_matter["summary"] || ""
-    @snippet.completion_scopes = [front_matter["completion-scope"]] || front_matter["completion-scopes"] || "All"
+    @snippet.completion_scopes = front_matter["completion-scopes"] || 'All'
     @snippet.identifier = SecureRandom.uuid().upcase
     @snippet.is_user_snippet = true
     @snippet.version = 0
