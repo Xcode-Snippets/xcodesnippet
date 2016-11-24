@@ -55,11 +55,17 @@ def extract_front_matter!
                         when ".mm" then "Xcode.SourceCodeLanguage.Objective-C++"
                         else ""
                         end
-    @snippet.title = front_matter["title"] || ""
-    @snippet.summary = front_matter["summary"] || ""
-    @snippet.completion_scopes = [front_matter["completion-scope"]] || front_matter["completion-scopes"] || "All"
-    @snippet.identifier = SecureRandom.uuid().upcase
+    @snippet.title = front_matter["title"] || @snippet.completion_prefix
+    @snippet.summary = front_matter["summary"] || @snippet.completion_prefix
+    if front_matter["completion-scope"]
+      @snippet.completion_scopes = [front_matter["completion-scope"]]
+    elsif(front_matter["completion-scopes"])
+      @snippet.completion_scopes = front_matter["completion-scopes"]
+    else    
+      @snippet.completion_scopes =  "All"
+    end
+    @snippet.identifier = @snippet.completion_prefix
     @snippet.is_user_snippet = true
-    @snippet.version = 0
+    @snippet.version = 2
   end
 end
