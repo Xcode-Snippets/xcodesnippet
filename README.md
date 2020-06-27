@@ -29,10 +29,7 @@ $ xcodesnippet install path/to/source.m
 
 ---
 
-## Creator
-
-Mattt Thompson ([@mattt](https://twitter.com/mattt))
-
 ## License
 
-xcodesnippet is released under an MIT license. See LICENSE for more information.
+xcodesnippet is released under an MIT license. 
+See LICENSE for more information.
