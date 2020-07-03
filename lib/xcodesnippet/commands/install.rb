@@ -58,6 +58,9 @@ def extract_front_matter!
     @snippet.title = front_matter["title"] || ""
     @snippet.summary = front_matter["summary"] || ""
     @snippet.completion_scopes = [front_matter["completion-scope"]] || front_matter["completion-scopes"] || "All"
+    @snippet.completion_scopes.collect! { |var|
+      var ==  "Function or Method" ? "CodeBlock" : var
+    }
     @snippet.identifier = SecureRandom.uuid().upcase
     @snippet.is_user_snippet = true
     @snippet.version = 0
